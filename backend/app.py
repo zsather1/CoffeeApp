@@ -16,7 +16,7 @@ def hello_world():  # put application's code here
 @app.route('/select_person', methods=['POST'])
 def who_pays_data():
     """
-    This function handles POST requests to /process_json.
+    This function handles POST requests to /select_person.
     It expects JSON data in the request body, processes it,
     and returns a JSON response.
     """
@@ -30,6 +30,8 @@ def who_pays_data():
             return jsonify({"error": "No JSON data provided"}), 400
 
         orders = input_json.get('orders', '[]')
+        print(orders)
+        orders = [(o["name"],o["cost"]) for o in orders]
         amount = alg.who_pays(orders)
         print(alg.people)
 

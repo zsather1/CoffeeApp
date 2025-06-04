@@ -19,6 +19,7 @@
 .env.production.local
 .idea
 frontend/README.md
+frontend/package-lock.json
 
 npm-debug.log*
 yarn-debug.log*

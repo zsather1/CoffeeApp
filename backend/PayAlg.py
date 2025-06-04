@@ -7,12 +7,12 @@ class PayAlg:
     def __init__(self, people: list = []):
         self.people = collections.defaultdict(int)
         for p in people:
-            self.people[p] = 0
+            self.people[p.capitalize()] = 0
 
     def update_orders(self, orders: list[tuple]):
         for o in orders:
             person, order = o
-            self.people[person] += order
+            self.people[person.capitalize()] += order
 
     def pick_person(self):
         people = list(self.people.keys())
@@ -22,7 +22,7 @@ class PayAlg:
     def who_pays(self, orders: list[tuple]):
         self.update_orders(orders)
         person = self.pick_person()
-        self.people[person] -= sum([o[1] for o in orders])
+        self.people[person.capitalize()] -= sum([o[1] for o in orders])
         return person
 
 
