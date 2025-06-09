@@ -9,34 +9,43 @@ class PayAlg:
     People who have paid less than their share are more likely to be selected to pay next.
     """
 
-    def __init__(self, people: list = []):
+    def __init__(self, people=None):
         """
         Initializes the PayAlg object.
 
         Args:
-            people (list): Names of the people participating.
+            people (list): Names of the people ordering.
         """
         # A dictionary to store the running balance for each person.
         # A positive balance means the person has paid less than their share.
         # A negative balance means the person has paid more than their share.
+        if people is None:
+            people = []
         self.people = collections.defaultdict(int)
         for p in people:
             self.people[p.capitalize()] = 0
 
-    def update_orders(self, orders: list[tuple]):
+    def update_orders(self, orders: list[tuple]) -> list[str]:
         """
         Updates each person's balance with the cost of their new orders.
 
         Args:
             orders (list[tuple]): A list of tuples, where each tuple contains a person's name and the cost of their order.
                                   Example: [("Olivia", 25), ("Liam", 30)]
+        Returns:
+            list[str]: A list of strings, where each string represents a person's name.
         """
+        people = []
+
         for o in orders:
             person, order = o
             # Add the cost of the order to the person's balance.
             self.people[person.capitalize()] += order
+            people.append(person.capitalize())
 
-    def pick_person(self):
+        return people
+
+    def pick_person(self, people: list) -> tuple:
         """
         Selects a person to pay based on their current balance.
 
@@ -45,17 +54,18 @@ class PayAlg:
         they are to be chosen. If a person has a negative balance (they've overpaid),
         their weight is set to 0, so they will not be chosen to pay.
 
+        Args:
+            people (list): Names of the people ordering.
+
         Returns:
             str: The name of the person selected to pay.
         """
-        # Get the list of people.
-        people = list(self.people.keys())
         # Create a list of weights. The weight is the person's balance, but not less than 0.
         weights = [num if num >= 0 else 0 for num in list(self.people.values())]
         # Randomly choose one person from the population based on the calculated weights.
         return random.choices(population=people, weights=weights, k=1)[0]
 
-    def who_pays(self, orders: list[tuple]):
+    def who_pays(self, orders: list[tuple]) -> float:
         """
         Determines who pays for the current round of orders.
 
@@ -70,9 +80,9 @@ class PayAlg:
             str: The name of the person who will pay.
         """
         # Update everyone's balance with their individual order costs.
-        self.update_orders(orders)
+        people_in = self.update_orders(orders)
         # Select the person who will pay for this round.
-        person = self.pick_person()
+        person = self.pick_person(people_in)
         # The payer's balance is reduced by the total cost of everyone's orders for this round.
         self.people[person.capitalize()] -= sum([o[1] for o in orders])
         return person
@@ -80,7 +90,7 @@ class PayAlg:
 
 # This block of code demonstrates the functionality of the PayAlg class when the script is run directly.
 if __name__ == "__main__":
-    # A list of names participating.
+    # A list of names ordering.
     names = ["Olivia", "Liam", "Emma", "Noah", "Amelia", "Oliver", "Sophia"]
 
     # Initialize the PayAlg class. It can be initialized with a list of names or empty.
