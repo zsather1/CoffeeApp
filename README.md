@@ -5,6 +5,7 @@ A simple app to help people decide who should pay for coffee
 Program Assumptions:
 
 - Not being used by multiple groups
+- People cannot have exact same name spelling
 - People and orders in group can change
 - App uses in memory storage so being shut down between usages results in memory of previous orders being wiped
 
