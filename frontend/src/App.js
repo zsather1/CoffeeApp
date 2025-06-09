@@ -209,8 +209,7 @@ export default function App() {
             className={`rounded-lg bg-indigo-600 px-8 py-3.5 text-lg font-semibold text-white shadow-xl hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-slate-800 transition-all duration-150 ease-in-out transform hover:scale-105 ${isSending ? 'opacity-50 cursor-not-allowed' : ''} ${people.length === 0 ? 'opacity-50 cursor-not-allowed bg-slate-600 hover:bg-slate-600' : ''}`}
             disabled={isSending || people.length === 0}
           >
-            <SendIcon className="w-6 h-6 mr-2 inline-block" />
-            {isSending ? 'Sending...' : 'Send Data to Server'}
+            {isSending ? 'Sending...' : 'Who Pays?'}
           </button>
         </div>
       </main>
