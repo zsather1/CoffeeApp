@@ -18,4 +18,4 @@ Navigate to `/frontend` and run
 
 `npm install`
 
-`npm start` - to run in your local broswer at  [http://localhost:3000](http://localhost:3000) 
+`npm start` - to run in your local browser at [http://localhost:3000](http://localhost:3000) 
