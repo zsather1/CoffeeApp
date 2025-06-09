@@ -10,7 +10,7 @@ Program Assumptions:
 
 Run instructions:
 
-Need to have `NodeJS` installed
+Need to have `NodeJS` installed. Use the following commands in a terminal window. I tested these on Mac, but it should also work on Linux. No Windows support.
 
 Backend:
 
