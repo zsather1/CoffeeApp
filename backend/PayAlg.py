@@ -14,16 +14,16 @@ class PayAlg:
         Initializes the PayAlg object.
 
         Args:
-            people (list): Names of the people ordering.
+            people (dictionary): Names of the people ordering.
         """
         # A dictionary to store the running balance for each person.
         # A positive balance means the person has paid less than their share.
         # A negative balance means the person has paid more than their share.
         if people is None:
-            people = []
+            people = collections.defaultdict(int)
         self.people = collections.defaultdict(int)
         for p in people:
-            self.people[p.capitalize()] = 0
+            self.people[p.capitalize()] = people[p]
 
     def update_orders(self, orders: list[tuple]) -> list[str]:
         """
